@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <h1>&#9836; Soundboard</h1>
+    <div class="volume-control">
+      <label for="master-volume" title="Master Volume">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+      </label>
+      <input type="range" id="master-volume" min="0" max="1" step="0.01" value="0.8">
+      <span id="volume-display">80%</span>
+    </div>
+  </header>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <main>
+
+    <!-- LEFT: LIBRARY -->
+    <aside class="library-panel">
+      <div class="library-header">
+        <h2>Music Library</h2>
+        <input type="search" id="search" placeholder="Search tracks&hellip;" autocomplete="off">
+      </div>
+      <div class="tag-filters" id="tag-filters"></div>
+      <div class="track-list" id="track-list"></div>
+    </aside>
+
+    <!-- RIGHT: SLOTS + SFX -->
+    <section class="main-panel">
+
+      <!-- MUSIC SLOTS -->
+      <div class="slots-section">
+        <div class="section-header">
+          <h2>Slots</h2>
+          <span class="section-hint" id="slot-hint">Select a track from the library, then click a slot to load it.</span>
+        </div>
+        <div class="slots-grid" id="slots-grid"></div>
+      </div>
+
+      <!-- SOUND EFFECTS -->
+      <div class="sfx-section">
+        <div class="section-header">
+          <h2>Sound Effects</h2>
+          <span class="section-hint">Click to play &mdash; does not interrupt music.</span>
+        </div>
+        <div class="sfx-grid" id="sfx-grid"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
