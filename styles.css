@@ -84,14 +84,13 @@ header h1 {
 #master-volume {
   -webkit-appearance: none;
   appearance: none;
-  width: 260px;
-  height: 20px;
+  width: clamp(200px, 55vw, 900px);
+  height: 44px;
   border-radius: 10px;
   background: transparent;
   outline: none;
   cursor: pointer;
-  /* Larger invisible hit area */
-  padding: 8px 0;
+  padding: 16px 0;
 }
 
 #master-volume::-webkit-slider-runnable-track {
@@ -102,12 +101,12 @@ header h1 {
 
 #master-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  margin-top: -8px;
+  margin-top: -11px;
   transition: transform var(--transition);
 }
 
@@ -118,8 +117,8 @@ header h1 {
   background: var(--border);
 }
 #master-volume::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;

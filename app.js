@@ -546,16 +546,10 @@ function renderSlots() {
       // Ensure AudioContext is started on user gesture
       AudioEngine.ensureContext();
 
-      // On touch devices, loading is handled exclusively via the slot picker
-      // modal — never via State.selectedTrack — to avoid iOS phantom tap issues.
-      const isTouch = navigator.maxTouchPoints > 0;
-      if (!isTouch && State.selectedTrack) {
-        assignTrackToSlot(State.selectedTrack, i);
-        State.selectedTrack = null;
-        updateSlotHint();
-        renderLibrary();
-        return;
-      }
+      // Slot taps always play — track loading is modal-only on all devices.
+      // Clear any stale selection so it can never intercept a play tap.
+      State.selectedTrack = null;
+      updateSlotHint();
 
       if (State.slots[i] && !State.slots[i].loading) {
         AudioEngine.activateSlot(i).then(() => renderSlots());
