@@ -5,7 +5,7 @@
 const CONFIG = {
   // Base URL of your Azure Blob Storage container (no trailing slash)
   // Example: 'https://mystorage.blob.core.windows.net/soundboard'
-  storageBaseUrl: 'https://YOUR_ACCOUNT.blob.core.windows.net/YOUR_CONTAINER',
+  storageBaseUrl: 'https://dndsoundboard.blob.core.windows.net/dndsoundboard-tunes',
 
   // Crossfade duration (seconds) when switching between slots
   slotCrossfadeDuration: 2.0,
