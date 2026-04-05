@@ -146,6 +146,17 @@ const AudioEngine = (() => {
         () => new SlotPlayer(ctx, masterGain));
     }
     if (ctx.state === 'suspended') ctx.resume();
+    // iOS blocks audio started outside a user gesture, even from async callbacks.
+    // Playing a silent 1-sample buffer synchronously within the gesture unlocks it.
+    if (!ctx._unlocked) {
+      const silent = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = silent;
+      src.connect(ctx.destination);
+      src.start(0);
+      src.onended = () => src.disconnect();
+      ctx._unlocked = true;
+    }
   }
 
   async function loadBuffer(url) {
