@@ -659,10 +659,22 @@ function initVolume() {
   const slider  = document.getElementById('master-volume');
   const display = document.getElementById('volume-display');
 
-  slider.addEventListener('input', () => {
-    const v = parseFloat(slider.value);
+  function applyVolume(v) {
+    slider.value = v;
     display.textContent = Math.round(v * 100) + '%';
     AudioEngine.setVolume(v);
+  }
+
+  slider.addEventListener('input', () => applyVolume(parseFloat(slider.value)));
+
+  // iOS Safari does not jump the thumb on track tap — handle it manually.
+  // Use pointerdown so it fires on first touch without waiting for pointerup.
+  slider.addEventListener('pointerdown', e => {
+    const rect = slider.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const min = parseFloat(slider.min) || 0;
+    const max = parseFloat(slider.max) || 1;
+    applyVolume(min + ratio * (max - min));
   });
 }
 

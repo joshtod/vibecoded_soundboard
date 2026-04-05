@@ -364,7 +364,8 @@ main {
   user-select: none;
 }
 
-.slot-card:hover { border-color: var(--accent); background: var(--bg3); }
+.slot-card:hover,
+.slot-card:active { border-color: var(--accent); background: var(--bg3); }
 .slot-card.drop-target { border-color: var(--accent); border-style: dashed; background: var(--accent-glow); }
 
 .slot-card.active {
@@ -426,7 +427,8 @@ main {
   z-index: 2;
 }
 
-.slot-card:hover .slot-remove { opacity: 1; }
+.slot-card:hover .slot-remove,
+.slot-card:active .slot-remove { opacity: 1; }
 .slot-remove:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
 
 /* Playing pulse animation */
