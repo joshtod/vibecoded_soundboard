@@ -333,7 +333,6 @@ function renderLibrary() {
           ${tags.map(t => `<span class="tag-badge">${escHtml(t)}</span>`).join('')}
         </div>
       </div>
-      <button class="track-item-tag-btn" data-track-id="${track.id}" title="Edit user tags">+ tag</button>
       <button class="track-item-add" data-track-id="${track.id}" title="Add to slot">+</button>
     `;
 
@@ -355,11 +354,6 @@ function renderLibrary() {
       showSlotPicker(track);
     });
 
-    // Tag button → open tag editor
-    item.querySelector('.track-item-tag-btn').addEventListener('click', e => {
-      e.stopPropagation();
-      openTagEditor(track, item.querySelector('.track-item-tag-btn'));
-    });
 
     // Drag
     item.addEventListener('dragstart', e => {
@@ -563,8 +557,8 @@ function renderSlots() {
         return;
       }
 
-      if (State.slots[i]) {
-        toggleSlot(i);
+      if (State.slots[i] && !State.slots[i].loading) {
+        AudioEngine.activateSlot(i).then(() => renderSlots());
       }
     });
 

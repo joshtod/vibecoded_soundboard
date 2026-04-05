@@ -84,28 +84,42 @@ header h1 {
 #master-volume {
   -webkit-appearance: none;
   appearance: none;
-  width: 160px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--border);
+  width: 260px;
+  height: 20px;
+  border-radius: 10px;
+  background: transparent;
   outline: none;
   cursor: pointer;
+  /* Larger invisible hit area */
+  padding: 8px 0;
+}
+
+#master-volume::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
 }
 
 #master-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
+  margin-top: -8px;
   transition: transform var(--transition);
 }
 
-#master-volume::-webkit-slider-thumb:hover { transform: scale(1.3); }
+#master-volume::-webkit-slider-thumb:hover { transform: scale(1.15); }
+#master-volume::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+}
 #master-volume::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
