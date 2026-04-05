@@ -338,9 +338,15 @@ function renderLibrary() {
     `;
 
     // Select track (click anywhere except buttons)
+    // On touch devices, go straight to the slot picker — the two-step
+    // select-then-tap-slot flow is unreliable on iOS due to phantom taps.
     item.addEventListener('click', e => {
       if (e.target.closest('button')) return;
-      selectTrack(track);
+      if (navigator.maxTouchPoints > 0) {
+        showSlotPicker(track);
+      } else {
+        selectTrack(track);
+      }
     });
 
     // Add button → open slot picker
@@ -370,6 +376,12 @@ function renderLibrary() {
 }
 
 function selectTrack(track) {
+  // Guard against iOS phantom taps: after a DOM rebuild iOS can fire a second
+  // synthetic click at the same coordinates, which would immediately toggle off
+  // the track we just selected. Ignore calls within 350ms of a selection.
+  const now = Date.now();
+  if (selectTrack._lastSelected === track.id && now - selectTrack._lastTime < 350) return;
+
   // Toggle selection
   if (State.selectedTrack?.id === track.id) {
     State.selectedTrack = null;
@@ -378,6 +390,8 @@ function selectTrack(track) {
     return;
   }
   State.selectedTrack = track;
+  selectTrack._lastSelected = track.id;
+  selectTrack._lastTime = now;
   updateSlotHint();
   renderLibrary();
   showToast(`"${track.name}" selected — click a slot to load it.`);
