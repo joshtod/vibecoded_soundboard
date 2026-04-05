@@ -352,7 +352,6 @@ function renderLibrary() {
     // Add button → open slot picker
     item.querySelector('.track-item-add').addEventListener('click', e => {
       e.stopPropagation();
-      selectTrack(track);
       showSlotPicker(track);
     });
 
@@ -447,6 +446,11 @@ function showSlotPicker(track) {
 
 function removeModal() {
   document.getElementById('slot-picker-overlay')?.remove();
+  // Always clear selection when modal closes so stale state can't cause
+  // a subsequent slot tap to unexpectedly load a track.
+  State.selectedTrack = null;
+  updateSlotHint();
+  renderLibrary();
 }
 
 // ── UI — TAG EDITOR ────────────────────────────────────────
@@ -541,17 +545,21 @@ function renderSlots() {
       `;
     }
 
-    // Click: if track selected → assign it; else if slot filled → play/toggle
+    // Click: if track selected (desktop only) → assign it; else play/toggle
     card.addEventListener('click', e => {
       if (e.target.closest('.slot-remove')) return;
 
       // Ensure AudioContext is started on user gesture
       AudioEngine.ensureContext();
 
-      if (State.selectedTrack) {
+      // On touch devices, loading is handled exclusively via the slot picker
+      // modal — never via State.selectedTrack — to avoid iOS phantom tap issues.
+      const isTouch = navigator.maxTouchPoints > 0;
+      if (!isTouch && State.selectedTrack) {
         assignTrackToSlot(State.selectedTrack, i);
         State.selectedTrack = null;
         updateSlotHint();
+        renderLibrary();
         return;
       }
 
