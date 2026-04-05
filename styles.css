@@ -356,6 +356,7 @@ main {
   padding: 10px 12px;
   min-height: 76px;
   cursor: pointer;
+  touch-action: manipulation;
   transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
   display: flex;
   flex-direction: column;

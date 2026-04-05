@@ -667,14 +667,24 @@ function initVolume() {
 
   slider.addEventListener('input', () => applyVolume(parseFloat(slider.value)));
 
-  // iOS Safari does not jump the thumb on track tap — handle it manually.
-  // Use pointerdown so it fires on first touch without waiting for pointerup.
-  slider.addEventListener('pointerdown', e => {
+  // iOS Safari does not jump the thumb on track tap, and loses tracking if the
+  // finger moves off the thumb. Handle all pointer events manually with capture.
+  function valueFromPointer(e) {
     const rect = slider.getBoundingClientRect();
     const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     const min = parseFloat(slider.min) || 0;
     const max = parseFloat(slider.max) || 1;
-    applyVolume(min + ratio * (max - min));
+    return min + ratio * (max - min);
+  }
+
+  slider.addEventListener('pointerdown', e => {
+    slider.setPointerCapture(e.pointerId);
+    applyVolume(valueFromPointer(e));
+  });
+
+  slider.addEventListener('pointermove', e => {
+    if (e.buttons === 0) return; // only while pressed
+    applyVolume(valueFromPointer(e));
   });
 }
 
