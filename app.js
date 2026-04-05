@@ -539,21 +539,29 @@ function renderSlots() {
       `;
     }
 
-    // Click: if track selected (desktop only) → assign it; else play/toggle
-    card.addEventListener('click', e => {
+    function handleSlotActivate(e) {
       if (e.target.closest('.slot-remove')) return;
-
-      // Ensure AudioContext is started on user gesture
       AudioEngine.ensureContext();
-
-      // Slot taps always play — track loading is modal-only on all devices.
-      // Clear any stale selection so it can never intercept a play tap.
       State.selectedTrack = null;
       updateSlotHint();
-
       if (State.slots[i] && !State.slots[i].loading) {
         AudioEngine.activateSlot(i).then(() => renderSlots());
       }
+    }
+
+    // On touch devices use touchend + preventDefault so iOS never generates a
+    // subsequent click event. That phantom click (after DOM rebuild) was
+    // re-triggering activateSlot and immediately toggling the slot back off.
+    card.addEventListener('touchend', e => {
+      if (e.target.closest('.slot-remove')) return;
+      e.preventDefault();
+      handleSlotActivate(e);
+    }, { passive: false });
+
+    // Desktop: use click as normal.
+    card.addEventListener('click', e => {
+      if (navigator.maxTouchPoints > 0) return; // handled by touchend above
+      handleSlotActivate(e);
     });
 
     // Remove button
