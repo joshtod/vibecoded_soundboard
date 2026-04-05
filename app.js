@@ -249,7 +249,7 @@ function showToast(msg, durationMs = 2500) {
 // ── METADATA LOADING ───────────────────────────────────────
 async function loadMetadata() {
   try {
-    const res = await fetch(url('metadata.json'));
+    const res = await fetch('metadata.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     State.library.music = data.music || [];
