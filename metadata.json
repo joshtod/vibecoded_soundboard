@@ -1,54 +1,36 @@
 {
   "music": [
     {
-      "id": "track_001",
-      "name": "Forest Ambience",
-      "file": "music/forest_ambience.mp3",
+      "id": "calm_01",
+      "name": "Soft Music",
+      "file": "music/soft_music.mp3",
       "tags": ["nature", "calm", "ambient"]
     },
     {
-      "id": "track_002",
-      "name": "Tavern Bustle",
-      "file": "music/tavern_bustle.mp3",
-      "tags": ["fantasy", "indoor", "lively"]
-    },
-    {
-      "id": "track_003",
-      "name": "Dungeon Depths",
-      "file": "music/dungeon_depths.mp3",
-      "tags": ["fantasy", "tense", "dark"]
-    },
-    {
-      "id": "track_004",
-      "name": "Ocean Waves",
-      "file": "music/ocean_waves.mp3",
-      "tags": ["nature", "calm", "water"]
+      "id": "fight_01",
+      "name": "Fight Music",
+      "file": "music/fight_music.mp3",
+      "tags": ["active", "tension", "fight"]
     }
   ],
   "sfx": [
     {
-      "id": "sfx_001",
-      "name": "Thunder Crack",
-      "file": "sfx/thunder.mp3",
-      "tags": ["weather", "dramatic"]
+      "id": "sfx_01",
+      "name": "Sound Effect 1",
+      "file": "sfx/sound_effect_1.mp3",
+      "tags": ["arbitrary"]
     },
     {
-      "id": "sfx_002",
-      "name": "Door Creak",
-      "file": "sfx/door_creak.mp3",
-      "tags": ["indoor", "spooky"]
+      "id": "sfx_02",
+      "name": "Sound Effect 2",
+      "file": "sfx/sound_effect_2.mp3",
+      "tags": ["arbitrary"]
     },
     {
-      "id": "sfx_003",
-      "name": "Sword Clash",
-      "file": "sfx/sword_clash.mp3",
-      "tags": ["combat", "fantasy"]
-    },
-    {
-      "id": "sfx_004",
-      "name": "Crowd Cheer",
-      "file": "sfx/crowd_cheer.mp3",
-      "tags": ["crowd", "positive"]
+      "id": "sfx_03",
+      "name": "Sound Effect 3",
+      "file": "sfx/sound_effect_3.mp3",
+      "tags": ["arbitrary"]
     }
   ]
 }
