@@ -1,6 +1,12 @@
 {
   "music": [
     {
+      "id": "Carmina Burana Loop",
+      "name": "Carmina Burana Loop",
+      "file": "music/carmina burana loop.mp3",
+      "tags": ["nature", "calm", "ambient"]
+    },
+    {
       "id": "calm_01",
       "name": "Soft Music",
       "file": "music/soft_music.mp3",
@@ -14,6 +20,12 @@
     }
   ],
   "sfx": [
+    {
+      "id": "Carmina Burana Stinger",
+      "name": "Carmina Burana Stinger",
+      "file": "sfx/carmina burana intro.mp3",
+      "tags": ["arbitrary"]
+    },
     {
       "id": "sfx_01",
       "name": "Sound Effect 1",
